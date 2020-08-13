@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MvcAspTest.Models
+namespace BootstrapIntroduction.Models
 {
     public enum SortOrder
     {

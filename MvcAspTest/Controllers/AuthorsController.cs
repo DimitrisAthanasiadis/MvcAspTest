@@ -20,10 +20,16 @@ namespace MvcAspTest.Controllers
         // GET: Authors
         public ActionResult Index([Form] QueryOptions queryOptions)
         {
-            var authors = db.authors.OrderBy(queryOptions.Sort);
+            var start = (queryOptions.currentPage - 1) * queryOptions.pageSize;
+            var authors = db.authors.OrderBy(queryOptions.Sort).
+                Skip(start).
+                Take(queryOptions.pageSize);
             ViewBag.QueryOptions = queryOptions;
 
-            return View(db.authors.ToList());
+            queryOptions.totalPages = (int)Math.Ceiling((double)db.authors.Count() / queryOptions.pageSize);
+            ViewBag.queryOptions = queryOptions;
+
+            return View(authors.ToList());
         }
 
         // GET: Authors/Details/5
@@ -44,7 +50,7 @@ namespace MvcAspTest.Controllers
         // GET: Authors/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Form", new Author());
         }
 
         // POST: Authors/Create
@@ -76,7 +82,7 @@ namespace MvcAspTest.Controllers
             {
                 return HttpNotFound();
             }
-            return View(author);
+            return View("Form", author);
         }
 
         // POST: Authors/Edit/5

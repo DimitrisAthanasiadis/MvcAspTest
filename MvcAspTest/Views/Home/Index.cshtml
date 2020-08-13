@@ -12,26 +12,30 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>@Html.BuildSortableLink("First Name", "Index", "firstName", queryOptions)</th>
-            <th>@Html.BuildSortableLink("Last Name", "Index", "lastName", queryOptions)</th>
+            @*<th>@Html.BuildSortableLink("First Name", "Index", "firstName", queryOptions)</th>
+        <th>@Html.BuildSortableLink("Last Name", "Index", "lastName", queryOptions)</th>*@
+            <th>Sort link that does nothing for now</th>
+            <th>Sort link that does nothing for now</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody data-bind="foreach :authors">
         <tr>
-            <td data-bind="text: FirstName"></td>
-            <td data-bind="text: LastName"></td>
+            <td data-bind="text: firstName"></td>
+            <td data-bind="text: lastName"></td>
             <td>
-            <a data-bind="attr: { href: '@Url.Action("Details")/' + Id }"
+            <a data-bind="attr: { href: '@Url.Action("Details")/' + id }"
                 class="btn btn-info">Details</a>
-            <a data-bind="attr: { href: '@Url.Action("Edit")/' + Id }"
+            <a data-bind="attr: { href: '@Url.Action("Edit")/' + id }"
                 class="btn btn-primary">Edit</a>
-            <a data-bind="attr: { href: '@Url.Action("Delete")/' + Id }"
+            <a data-bind="attr: { href: '@Url.Action("Delete")/' + id }"
                 class="btn btn-danger">Delete</a>
             </td>
         </tr>
     </tbody>
 </table>
+@*@Html.BuildNextPreviousLinks(queryOptions, "Index")*@
+<span><strong>Paginator was supposed to exist but queryOptions is always null...</strong></span>
 
 @section Scripts{
     <script>
